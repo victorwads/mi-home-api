@@ -1,0 +1,30 @@
+{
+  "name": "homewads-api",
+  "version": "1.0.0",
+  "description": "Home API to Control Xiaomi Home Appliance",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/victorwads/homewads-api.git"
+  },
+  "keywords": [
+    "home",
+    "vaccum",
+    "xiaomi",
+    "mihome",
+    "automation",
+    "house"
+  ],
+  "author": "@victorwads",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/victorwads/homewads-api/issues"
+  },
+  "homepage": "https://github.com/victorwads/homewads-api#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
