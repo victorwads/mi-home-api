@@ -4,7 +4,9 @@
   "description": "Home API to Control Xiaomi Home Appliance",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon -r esm index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "./node_modules/.bin/eslint ./src --ext .js --fix"
   },
   "repository": {
     "type": "git",
@@ -24,7 +26,26 @@
     "url": "https://github.com/victorwads/homewads-api/issues"
   },
   "homepage": "https://github.com/victorwads/homewads-api#readme",
+  "_moduleAliases": {
+    "@helpers": "src/helpers"
+  },
+  "esm": {
+    "await": true
+  },
   "dependencies": {
-    "express": "^4.17.1"
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "express-validator": "5.0.1",
+    "module-alias": "^2.2.0",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.0.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "nodemon": "^1.19.1"
   }
 }
