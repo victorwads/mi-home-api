@@ -2,9 +2,9 @@ import fetch from 'node-fetch'
 
 var url = 'http://localhost:8123/api/'
 var token = process.env.HASS_TOKEN
+console.log(token)
 
 async function callService(domain, action, body) {
-    console.log(body)
     const response = await fetch(`${url}services/${domain}/${action}`, {
         method: 'POST',
         headers: {
@@ -14,7 +14,9 @@ async function callService(domain, action, body) {
         },
         body: JSON.stringify(body)
     })
-    return await response.text()
+    const text = await response.text()
+    console.log(text)
+    return text
 }
 
 let alias_zones
@@ -40,9 +42,8 @@ let alias_zones
 }
 
 function getZone(name) {
-    console.log(name)
     name = name.toLowerCase()
-        .replace(/(the |my |s )/, '')
+        .replace(/(up the |the |up my |my |s )/, '')
         .replace(/[^a-z]*/g, '')
     console.log(name)
     return alias_zones[name]
