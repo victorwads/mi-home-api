@@ -9,7 +9,7 @@ const fan_speed_list = {
 
 let alias_zones
 {
-  let lucasbedroom = [[24200, 27300, 26600, 30000]]
+  let lucasbedroom = [[24200, 27350, 26600, 31300]]
   let kitchen = [[21950, 33300, 26500, 35000]]
   let livingroom = [[22000, 29850, 26000, 33100]]
   let hall = [[23200, 26000, 24100, 29950]]
