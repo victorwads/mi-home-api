@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,12 +9,25 @@
     <link rel="stylesheet" href="style.css">
     <script src="index.js"></script>
 </head>
+
 <body>
-<input type="button" onclick="javascript:cleanTest();" value="Clean Test">
-<input type="button" onclick="javascript:cleanStop();" value="Clean Stop">
-<input type="button" onclick="javascript:goToDock();" value="Go to Dock">
-<input type="button" onclick="javascript:getStatus();" value="Get Status">
-<input type="button" onclick="javascript:getZones();" value="Zones">
-<pre id="box"></pre>
+    <input type="button" onclick="javascript:cleanStop();" value="Stop">
+    <input type="button" onclick="javascript:goToDock();" value="Go to Dock">
+    <input type="button" onclick="javascript:getStatus();" value="Get Status">
+    <div>
+        <select id="zoneBox" aria-placeholder="Speed">
+            <option disabled selected>Zone</option>
+        </select>
+        <select id="speedBox" aria-placeholder="Speed">
+            <option disabled selected>Speed</option>
+            <option>Quiet</option>
+            <option>Balanced</option>
+            <option>Turbo</option>
+            <option>Max</option>
+        </select>
+        <input type="button" onclick="javascript:cleanTest();" value="Clean Zone">
+    </div>
+    <pre id="box"></pre>
 </body>
+
 </html>

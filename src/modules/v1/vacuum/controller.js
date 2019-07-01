@@ -1,5 +1,6 @@
 import homeServices from '@helpers/home-services'
 
+const entity_id = "vacuum.xiaomi_vacuum_cleaner"
 const fan_speed_list = {
   quiet: 'Quiet',
   balanced: 'Balanced',
@@ -9,7 +10,7 @@ const fan_speed_list = {
 
 let alias_zones
 {
-  let lucasbedroom = [[24200, 27350, 26600, 31300]]
+  let lucabedroom = [[24200, 27350, 26600, 31300]]
   let kitchen = [[21950, 33300, 26500, 35000]]
   let livingroom = [[22000, 29850, 26000, 33100]]
   let hall = [[23200, 26000, 24100, 29950]]
@@ -18,8 +19,7 @@ let alias_zones
     [22900, 23500, 26000, 26000]
   ]
   alias_zones = {
-    lucabedroom: lucasbedroom,
-    lucasbedroom,
+    lucabedroom,
     kitchen,
     livingroom,
     hall,
@@ -37,39 +37,46 @@ function getZone(name) {
   return alias_zones[name]
 }
 
-function getStatus() {
-  return homeServices.getStatus('vacuum.xiaomi_vacuum_cleaner')
+async function getStatus() {
+  return await homeServices.getStatus(entity_id)
 }
 
-function setSpeed(speed) {
-  homeServices.setStatus('vacuum.xiaomi_vacuum_cleaner', {
-    attributes: {
-      fan_speed: fan_speed_list[speed]
-    }
+async function setSpeed(speed) {
+  return await homeServices.callService('vacuum', 'set_fan_speed', entity_id, {
+    fan_speed: fan_speed_list[speed.toLowerCase()]
   })
 }
 
 export default {
   cleanZone: (req, res) => {
-    const { zone, repeats } = req.body
+    const { zone, repeats, speed } = req.body
 
-    homeServices.callService('vacuum', 'xiaomi_clean_zone', 'vacuum.xiaomi_vacuum_cleaner', {
+    if (speed)
+      setSpeed(speed)
+
+    homeServices.callService('vacuum', 'xiaomi_clean_zone', entity_id, {
       "repeats": repeats,
       "zone": getZone(zone)
     }).then(response => {
-      res.status(200).json({ status: 'cleaning' })
+      res.status(200).json({ status: `cleaning ${zone}` })
     })
 
   },
   stop: async (req, res) => {
-    await homeServices.callService('vacuum', 'pause', 'vacuum.xiaomi_vacuum_cleaner')
-    homeServices.callService('vacuum', 'stop', 'vacuum.xiaomi_vacuum_cleaner')
+
+    const status = await getStatus()
+    if (status.state == "returning")
+      await homeServices.callService('vacuum', 'pause', entity_id)
+//    else if (status.state == "docked" || status.state == "idle")
+//      return res.status(200).json({ status: 'stoped' })
+
+    homeServices.callService('vacuum', 'stop', entity_id)
       .then(response =>
         res.status(200).json({ status: 'stoping' })
       )
   },
   dock: (req, res) =>
-    homeServices.callService('vacuum', 'return_to_base', 'vacuum.xiaomi_vacuum_cleaner')
+    homeServices.callService('vacuum', 'return_to_base', entity_id)
       .then(response =>
         res.status(200).json({ status: 'going back' })
       )
@@ -77,8 +84,8 @@ export default {
   setSpeed: (req, res) => {
     const { speed } = req.body
 
-    setSpeed(speed).then(response =>
-      res.status(200).json(response)
+    setSpeed(speed).then(async response =>
+      res.status(200).json(await response.json())
     )
   },
   status: (req, res) =>
@@ -87,5 +94,5 @@ export default {
     )
   ,
   zones: (req, res) =>
-    res.status(200).json(homeServices.zones)
+    res.status(200).json(alias_zones)
 }

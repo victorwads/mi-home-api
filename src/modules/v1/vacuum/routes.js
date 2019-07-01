@@ -7,6 +7,7 @@ const router = express.Router()
 router.get('/status', controller.status)
 router.get('/zone', controller.zones)
 router.post('/zone', [validators.checkFields], controller.cleanZone)
+router.post('/speed', controller.setSpeed)
 router.post('/stop', controller.stop)
 router.post('/dock', controller.dock)
 

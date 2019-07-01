@@ -20,15 +20,6 @@ async function callService(domain, action, entity_id, body) {
     return await response.text()
 }
 
-async function setStatus(entity_id, body) {
-    const response = await fetch(`${url}states/${entity_id}`, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify(body)
-    })
-    return await response.json()
-}
-
 async function getStatus(entity_id) {
     const response = await fetch(`${url}states/${entity_id}`, {
         method: 'GET',
@@ -37,13 +28,7 @@ async function getStatus(entity_id) {
     return await response.json()
 }
 
-const entities = {
-    vaccum_cleanner: "vacuum.xiaomi_vacuum_cleaner"
-}
-
 export default {
-    entities,
     getStatus,
-    setStatus,
     callService
 }

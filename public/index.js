@@ -1,6 +1,19 @@
-let box;
-window.onload = () => {
+let box, speedBox, speedState;
+window.onload = async () => {
     box = document.getElementById('box')
+    zoneBox = document.getElementById('zoneBox')
+    speedBox = document.getElementById('speedBox')
+
+
+    const status = await (await getStatusAPI()).json()
+    speedState = status.attributes.fan_speed
+    speedBox.value = speedState
+    speedBox.addEventListener('change', setSpeed)
+
+    const zones = await (await getZonesAPI()).json()
+    for(let zone in zones){
+        zoneBox.innerHTML += `<option>${zone}</option>`
+    }
 }
 
 const options = {
@@ -10,12 +23,32 @@ const options = {
     },
 }
 
+async function getStatusAPI() {
+    return fetch('api/v1/vacuum/status', { ...options, method: 'GET' })
+}
+
+async function getZonesAPI() {
+    return fetch('api/v1/vacuum/zone', { ...options, method: 'GET' })
+}
+
 async function cleanTest() {
     log(fetch('api/v1/vacuum/zone', {
         ...options,
         body: JSON.stringify({
             repeats: 1,
-            zone: "lucas bedroom"
+            zone: zoneBox.value
+        })
+    }))
+}
+
+async function setSpeed() {
+    if (speedBox.value == speedState)
+        return
+    speedState = speedBox.value
+    log(fetch('api/v1/vacuum/speed', {
+        ...options,
+        body: JSON.stringify({
+            speed: speedState,
         })
     }))
 }
@@ -29,11 +62,7 @@ async function goToDock() {
 }
 
 async function getStatus() {
-    log(fetch('api/v1/vacuum/status', { ...options, method: 'GET' }))
-}
-
-async function getZones() {
-    log(fetch('api/v1/vacuum/zone', { ...options, method: 'GET' }))
+    log(getStatusAPI())
 }
 
 async function log(requestPromisse) {
