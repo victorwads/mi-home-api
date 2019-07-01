@@ -1,52 +1,40 @@
 import fetch from 'node-fetch'
 
-var url = 'http://localhost:8123/api/'
-var token = process.env.HASS_TOKEN
-console.log(token)
+const url = 'http://10.0.0.2:8123/api/'
+const token = process.env.HASS_TOKEN
+const headers = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + token,
+}
 
-async function callService(domain, action, body) {
+async function callService(domain, action, entity_id, body) {
     const response = await fetch(`${url}services/${domain}/${action}`, {
         method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token,
-        },
+        headers,
+        body: JSON.stringify({
+            entity_id,
+            ...body
+        })
+    })
+    return await response.text()
+}
+
+async function setStatus(entity_id, body) {
+    const response = await fetch(`${url}states/${entity_id}`, {
+        method: 'POST',
+        headers,
         body: JSON.stringify(body)
     })
-    const text = await response.text()
-    console.log(text)
-    return text
+    return await response.json()
 }
 
-let alias_zones
-{
-    let lucasbedroom = [[22900, 23500, 26000, 26000]]
-    let susiemess = [[25500, 25500, 25600, 25600]]
-    let kitchen = [[21950, 33300, 26500, 35000]]
-    let livingroom = [[22000, 29850, 26000, 33100]]
-    let hall = [[23200, 26000, 24100, 29950]]
-    let bedroom = [
-        [23200, 26000, 24200, 26500],
-        [22900, 23500, 26000, 26000]
-    ]
-    alias_zones = {
-        lucasbedroom,
-        susiemess,
-        kitchen,
-        livingroom,
-        hall,
-        bedroom,
-        victorbedroom: bedroom
-    }
-}
-
-function getZone(name) {
-    name = name.toLowerCase()
-        .replace(/(up the |the |up my |my |s )/, '')
-        .replace(/[^a-z]*/g, '')
-    console.log(name)
-    return alias_zones[name]
+async function getStatus(entity_id) {
+    const response = await fetch(`${url}states/${entity_id}`, {
+        method: 'GET',
+        headers,
+    })
+    return await response.json()
 }
 
 const entities = {
@@ -54,8 +42,8 @@ const entities = {
 }
 
 export default {
-    alias_zones,
-    getZone,
     entities,
+    getStatus,
+    setStatus,
     callService
 }

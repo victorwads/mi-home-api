@@ -4,8 +4,10 @@ import validators from './validators'
 
 const router = express.Router()
 
-router.get('/zone', controller.listZones)
-router.post('/stop', controller.stop)
+router.get('/status', controller.status)
+router.get('/zone', controller.zones)
 router.post('/zone', [validators.checkFields], controller.cleanZone)
+router.post('/stop', controller.stop)
+router.post('/dock', controller.dock)
 
 export default router
