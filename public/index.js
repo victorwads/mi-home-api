@@ -1,19 +1,38 @@
-let box, speedBox, speedState;
+let box, speedBox, speedState, bateryBox, bateryText, statusText;
 window.onload = async () => {
     box = document.getElementById('box')
     zoneBox = document.getElementById('zoneBox')
     speedBox = document.getElementById('speedBox')
+    bateryBox = document.getElementById('bateryBox')
+    bateryText = document.getElementById('bateryText')
+    statusText = document.getElementById('statusText')
 
+    getZonesAPI()
+        .then(res => res.json())
+        .then(zones => {
+            for (let zone in zones) {
+                zoneBox.innerHTML += `<option>${zone}</option>`
+            }
+        })
 
-    const status = await (await getStatusAPI()).json()
-    speedState = status.attributes.fan_speed
-    speedBox.value = speedState
+    configStatus()
+    setInterval(configStatus, 10000);
+}
+
+async function configStatus() {
+    const response = await (await getStatusAPI()).json()
+    const { fan_speed, battery_level, status } = response.attributes;
+    speedBox.removeEventListener('change', setSpeed)
+    speedState = fan_speed
+    speedBox.value = fan_speed
+
+    bateryBox.value = battery_level
+    bateryText.innerHTML = battery_level + '%'
+
+    statusText.innerHTML = status + ' - ' + response.state
+
     speedBox.addEventListener('change', setSpeed)
-
-    const zones = await (await getZonesAPI()).json()
-    for(let zone in zones){
-        zoneBox.innerHTML += `<option>${zone}</option>`
-    }
+    return response
 }
 
 const options = {

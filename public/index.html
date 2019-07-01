@@ -11,10 +11,24 @@
 </head>
 
 <body>
-    <input type="button" onclick="javascript:cleanStop();" value="Stop">
-    <input type="button" onclick="javascript:goToDock();" value="Go to Dock">
-    <input type="button" onclick="javascript:getStatus();" value="Get Status">
     <div>
+        <span>Status: </span>
+        <span id="statusText"></span>
+    </div>
+    <div>
+        <span>Batery: </span>
+        <progress id="bateryBox" min="0" max="100" value="0"></progress>
+        <span id="bateryText"></span>
+    </div>
+    <div>
+        <span>Actions: </span>
+        <input type="button" onclick="javascript:cleanStop();" value="Start">
+        <input type="button" onclick="javascript:cleanStop();" value="Stop">
+        <input type="button" onclick="javascript:goToDock();" value="Go to Dock">
+        <input type="button" onclick="javascript:getStatus();" value="Get Status">
+    </div>
+    <div>
+        <span>Clean Zone: </span>
         <select id="zoneBox" aria-placeholder="Speed">
             <option disabled selected>Zone</option>
         </select>
