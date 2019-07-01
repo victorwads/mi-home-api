@@ -1,3 +1,2 @@
 git pull
-npm i
-systemctl restart homeserver
+pm2 reload all
