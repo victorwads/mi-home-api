@@ -24,6 +24,7 @@ let aliasZones
     livingroom,
     hall,
     bedroom,
+    susiemes: livingroom,
     susiemess: livingroom,
     victorbedroom: bedroom
   }
@@ -31,10 +32,23 @@ let aliasZones
 
 function getZone (name) {
   name = name.toLowerCase()
-    .replace(/(up the |the |up my |my |s )/, '')
-    .replace(/[^a-z]*/g, '')
-  console.log(name)
-  return aliasZones[name]
+    .replace(/ room/g, 'room')
+    .replace(/ and /g, ' ')
+    .replace(/(up the |the |up my |my |s )/g, '')
+    .replace(/[^a-z ]*/g, '')
+
+  const coords = []
+  let names = name.split(' ')
+
+  for(let i = 0; i <= names.length; i++){
+    let zoneCoords = aliasZones[names[i]]
+    if(zoneCoords instanceof Array){
+      coords.concat(zoneCoords)
+    }
+  }
+  
+  console.log(names, coords)
+  return coords
 }
 
 async function getStatus () {
@@ -51,11 +65,16 @@ export default {
   cleanZone: (req, res) => {
     const { zone, repeats, speed } = req.body
 
-    if (speed) { setSpeed(speed) }
+    let coords = getZone(zone)
+    if(coords === undefined || coords.length === 0){
+      res.status(200).json({ error: `${zone} do not exists` })
+    }
+
+    if (speed) { setSpeed(speed) }    
 
     homeServices.callService('vacuum', 'xiaomi_clean_zone', entityId, {
       'repeats': repeats,
-      'zone': getZone(zone)
+      'zone': coords
     }).then(response => {
       res.status(200).json({ status: `cleaning ${zone}` })
     })
