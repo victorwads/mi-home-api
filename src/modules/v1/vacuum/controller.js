@@ -30,7 +30,7 @@ let aliasZones
   }
 }
 
-function getZone (name) {
+function getZone(name) {
   name = name.toLowerCase()
     .replace(/ room/g, 'room')
     .replace(/ and /g, ' ')
@@ -40,22 +40,22 @@ function getZone (name) {
   const coords = []
   let names = name.split(' ')
 
-  for(let i = 0; i <= names.length; i++){
-    let zoneCoords = aliasZones[names[i]]
-    if(zoneCoords instanceof Array){
-      coords.concat(zoneCoords)
-    }
-  }
-  
+  names.forEach(name => {
+    let zoneCoords = aliasZones[name]
+
+    if (zoneCoords instanceof Array)
+      zoneCoords.forEach(element => coords.push(element))
+  })
+
   console.log(names, coords)
   return coords
 }
 
-async function getStatus () {
+async function getStatus() {
   return homeServices.getStatus(entityId)
 }
 
-async function setSpeed (speed) {
+async function setSpeed(speed) {
   return homeServices.callService('vacuum', 'set_fan_speed', entityId, {
     fan_speed: fanSpeedList[speed.toLowerCase()]
   })
@@ -66,11 +66,11 @@ export default {
     const { zone, repeats, speed } = req.body
 
     let coords = getZone(zone)
-    if(coords === undefined || coords.length === 0){
+    if (coords === undefined || coords.length === 0) {
       res.status(200).json({ error: `${zone} do not exists` })
     }
 
-    if (speed) { setSpeed(speed) }    
+    if (speed) { setSpeed(speed) }
 
     homeServices.callService('vacuum', 'xiaomi_clean_zone', entityId, {
       'repeats': repeats,
