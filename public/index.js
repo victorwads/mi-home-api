@@ -1,5 +1,13 @@
 let box, speedBox, speedState, bateryBox, bateryText, statusText;
 window.onload = async () => {
+    var OneSignal = window.OneSignal || [];
+    OneSignal.push(function() {
+      OneSignal.init({
+        appId: "d1b284e5-8e85-4b00-bda9-09ae03553fc4",
+      });
+    });
+  
+
     box = document.getElementById('box')
     zoneBox = document.getElementById('zoneBox')
     speedBox = document.getElementById('speedBox')
