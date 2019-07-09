@@ -1,19 +1,24 @@
 import express from 'express'
+import cors from 'cors'
 import server from './config/server'
 import bodyParser from 'body-parser'
 import logger from 'morgan'
 import validator from 'express-validator'
 import versionRoutes from './modules/v1/routes'
 
-const app = express()
+const home = express()
+home.use(express.static('public'))
+home.use(logger('dev'))
 
-// Middlewares
-app.use(express.static('public'))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(validator())
-app.use(logger('dev'))
-app.use('/api/v1', versionRoutes)
+const api = express()
+api.use(cors({
+  origin: 'https://home.victorwads.com.br'
+}))
+api.use(bodyParser.json())
+api.use(bodyParser.urlencoded({ extended: false }))
+api.use(validator())
+api.use(logger('dev'))
+api.use('/api/v1', versionRoutes)
 
-server.start(app)
-export default app
+server.start(api, home)
+export default server

@@ -1,15 +1,17 @@
-let port = process.env.PORT || 8080
+const API_PORT = 8080
+const HOME_PORT = 8081
 
 const server = {}
-server.start = (app) => {
-  app.use((req, res, next) => {
+server.start = (api, home) => {
+  api.use((req, res, next) => {
     res.setHeader('Content-Type', 'application/json')
     next()
   })
-  app.listen(port, () => {
-    console.log('------------------------------------------------------------')
-    console.log('Server listening on port ' + port)
-    console.log('------------------------------------------------------------')
+  api.listen(API_PORT, () => {
+    console.log('API Server listening on port ' + API_PORT)
+  })
+  home.listen(HOME_PORT, () => {
+    console.log('Home Server listening on port ' + HOME_PORT)
   })
 }
 

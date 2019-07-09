@@ -33,6 +33,7 @@
     "await": true
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "express-validator": "5.0.1",

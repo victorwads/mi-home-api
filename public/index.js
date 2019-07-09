@@ -1,12 +1,12 @@
 let box, speedBox, speedState, bateryBox, bateryText, statusText;
 window.onload = async () => {
     var OneSignal = window.OneSignal || [];
-    OneSignal.push(function() {
-      OneSignal.init({
-        appId: "d1b284e5-8e85-4b00-bda9-09ae03553fc4",
-      });
+    OneSignal.push(function () {
+        OneSignal.init({
+            appId: "d1b284e5-8e85-4b00-bda9-09ae03553fc4",
+        });
     });
-  
+
 
     box = document.getElementById('box')
     zoneBox = document.getElementById('zoneBox')
@@ -43,6 +43,8 @@ async function configStatus() {
     return response
 }
 
+let port = window.location.port == '' ? '' : ':' + window.location.port
+const API_URL = 'https://api.home.victorwads.com.br' + port + '/api/v1/'
 const options = {
     method: 'POST',
     headers: {
@@ -51,15 +53,15 @@ const options = {
 }
 
 async function getStatusAPI() {
-    return fetch('api/v1/vacuum/status', { ...options, method: 'GET' })
+    return fetch(API_URL + 'vacuum/status', { ...options, method: 'GET' })
 }
 
 async function getZonesAPI() {
-    return fetch('api/v1/vacuum/zone', { ...options, method: 'GET' })
+    return fetch(API_URL + 'vacuum/zone', { ...options, method: 'GET' })
 }
 
 async function cleanTest() {
-    log(fetch('api/v1/vacuum/zone', {
+    log(fetch(API_URL + 'vacuum/zone', {
         ...options,
         body: JSON.stringify({
             repeats: 1,
@@ -72,7 +74,7 @@ async function setSpeed() {
     if (speedBox.value == speedState)
         return
     speedState = speedBox.value
-    log(fetch('api/v1/vacuum/speed', {
+    log(fetch(API_URL + 'vacuum/speed', {
         ...options,
         body: JSON.stringify({
             speed: speedState,
@@ -81,11 +83,11 @@ async function setSpeed() {
 }
 
 async function cleanStop() {
-    log(fetch('api/v1/vacuum/stop', options))
+    log(fetch(API_URL + 'vacuum/stop', options))
 }
 
 async function goToDock() {
-    log(fetch('api/v1/vacuum/dock', options))
+    log(fetch(API_URL + 'vacuum/dock', options))
 }
 
 async function getStatus() {
