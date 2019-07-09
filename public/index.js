@@ -1,4 +1,14 @@
 let box, speedBox, speedState, bateryBox, bateryText, statusText;
+let port = window.location.port == '' ? '' : ':' + window.location.port
+
+const API_URL = 'https://api.home.victorwads.com.br' + port + '/api/v1/'
+const options = {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+}
+
 window.onload = async () => {
     var OneSignal = window.OneSignal || [];
     OneSignal.push(function () {
@@ -7,13 +17,15 @@ window.onload = async () => {
         });
     });
 
-
+    video = document.getElementById('video')
     box = document.getElementById('box')
     zoneBox = document.getElementById('zoneBox')
     speedBox = document.getElementById('speedBox')
     bateryBox = document.getElementById('bateryBox')
     bateryText = document.getElementById('bateryText')
     statusText = document.getElementById('statusText')
+
+    video.src = 'https://modem.home.victorwads.com.br' + port
 
     getZonesAPI()
         .then(res => res.json())
@@ -41,15 +53,6 @@ async function configStatus() {
 
     speedBox.addEventListener('change', setSpeed)
     return response
-}
-
-let port = window.location.port == '' ? '' : ':' + window.location.port
-const API_URL = 'https://api.home.victorwads.com.br' + port + '/api/v1/'
-const options = {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
 }
 
 async function getStatusAPI() {

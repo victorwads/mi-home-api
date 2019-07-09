@@ -12,7 +12,6 @@ export default {
   cors: api => {
     api.use(cors({
       origin: function (origin, callback) {
-        console.log('COR::ORIGIN', origin)
         if (!origin) return callback(null, true);
         if (allowedOrigins.indexOf(origin) === -1) {
           return callback(null, false);

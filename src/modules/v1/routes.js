@@ -1,5 +1,6 @@
 import express from 'express'
 import vacuum from './vacuum/routes'
+import motion from './motion/routes'
 
 const router = express.Router()
 /**
@@ -11,6 +12,7 @@ router.get('/', (req, res) => {
 })
 
 router.use('/vacuum', vacuum)
+router.use('/motion', motion)
 
 // Return router
 export default router

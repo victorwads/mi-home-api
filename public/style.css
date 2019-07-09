@@ -5,6 +5,11 @@ html {
 p, span, pre {
     color: white;
 }
+
+img {
+    max-width: 100%;
+}
+
 progress {
     background-color: grey;
     border-radius: 4px;
