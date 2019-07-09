@@ -9,9 +9,10 @@ var allowedOrigins = [
 ];
 
 export default {
-  start: (api, home) => {
+  cors: api => {
     api.use(cors({
       origin: function (origin, callback) {
+        console.log('COR::ORIGIN', origin)
         if (!origin) return callback(null, true);
         if (allowedOrigins.indexOf(origin) === -1) {
           return callback(null, false);
@@ -19,6 +20,8 @@ export default {
         return callback(null, true);
       }
     }));
+  },
+  start: (api, home) => {
     api.use((req, res, next) => {
       res.setHeader('Content-Type', 'application/json')
       next()
