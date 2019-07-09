@@ -2,6 +2,7 @@ import { Notify } from '@helpers/onesignal'
 
 export const archivePath = '/archive'
 export const motionArchive = '/usr/share/hassio/share/motion/'
+
 export default {
     detect: (req, res) => {
         console.log(req.body)

@@ -25,7 +25,7 @@ window.onload = async () => {
     bateryText = document.getElementById('bateryText')
     statusText = document.getElementById('statusText')
 
-    video.src = 'https://modem.home.victorwads.com.br' + port
+
 
     getZonesAPI()
         .then(res => res.json())
@@ -37,6 +37,13 @@ window.onload = async () => {
 
     configStatus()
     setInterval(configStatus, 10000);
+}
+
+async function toggleCamera() {
+    if (video.src == '')
+        video.src = 'https://modem.home.victorwads.com.br' + port
+    else
+        video.src = ''
 }
 
 async function configStatus() {
