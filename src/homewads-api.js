@@ -1,5 +1,4 @@
 import express from 'express'
-import cors from 'cors'
 import server from './config/server'
 import bodyParser from 'body-parser'
 import logger from 'morgan'
@@ -11,9 +10,6 @@ home.use(express.static('public'))
 home.use(logger('dev'))
 
 const api = express()
-api.use(cors({
-  origin: 'https://home.victorwads.com.br'
-}))
 api.use(bodyParser.json())
 api.use(bodyParser.urlencoded({ extended: false }))
 api.use(validator())
