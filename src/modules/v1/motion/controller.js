@@ -9,7 +9,9 @@ export default {
         console.log(req.body)
         const { file, action, motion_area } = req.body
         if (action === 'start')
-            Notify('Motion Detected')
+            Notify(`Motion Detected ${motion_area.width}x${motion_area.height}, recording...`)
+        else if (action === 'end')
+            Notify('Video Available')
 
         res.send()
     }
