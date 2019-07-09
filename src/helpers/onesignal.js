@@ -9,12 +9,12 @@ console.log('appAuthKey', appAuthKey)
 console.log('appId', appId)
 
 export const Client = new OneSignal.Client({ userAuthKey, app: { appAuthKey, appId } });
-export const Notify = async msg => {
+export const Notify = async (msg, url) => {
     let notification = new OneSignal.Notification({
         contents: {
             en: msg,
         },
-        //web_buttons: [{ "id": "see", "text": "See More", "icon": "http://i.imgur.com/MIxJp1L.png", "url": "" }],
+        web_buttons: url ? [{ id: "see", text: "Watch", url }] : [],
         included_segments: ["Active Users", "Inactive Users"]
     });
     Client.sendNotification(notification)
