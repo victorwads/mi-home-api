@@ -1,7 +1,8 @@
+const base_domain = process.env.BASE_DOMAIN
 let box, speedBox, speedState, bateryBox, bateryText, statusText;
 let port = window.location.port == '' ? '' : ':' + window.location.port
 
-const API_URL = 'https://api.home.victorwads.com.br' + port + '/api/v1/'
+const API_URL = 'https://api.' + base_domain + port + '/api/v1/'
 const options = {
     method: 'POST',
     headers: {
@@ -41,7 +42,7 @@ window.onload = async () => {
 
 async function toggleCamera() {
     if (video.src == '')
-        video.src = 'https://modem.home.victorwads.com.br' + port
+        video.src = 'https://modem.' + base_domain + port
     else
         video.src = ''
 }

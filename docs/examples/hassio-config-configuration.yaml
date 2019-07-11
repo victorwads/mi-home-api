@@ -1,0 +1,31 @@
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+http:
+   base_url: xxxxxxx.duckdns.org:8123
+
+tts:
+  - platform: google_translate
+
+default_config:
+
+frontend:
+  themes: !include themes.yaml
+
+camera:
+  - platform: mjpeg
+    mjpeg_url: http://localhost:3081
+    name: Note Cam
+
+vacuum:
+  - platform: xiaomi_miio
+    host: 10.0.0.11
+    token: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+yeelight:
+  devices:
+    10.0.0.12:
+      name: Light Victor's Bedroom
+    10.0.0.13:
+      name: Light Door

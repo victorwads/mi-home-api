@@ -45,7 +45,8 @@ This is a Node Js API that centers some home appliance services initialli to abl
  
 ## Dependencies Configs Exemples
 
- - Motion - [etc/motion/config.d - exemple](docs/exemples/etc-motion-config.d)
+ - Motion - [etc/motion/config.d - exemple](docs/examples/etc-motion-config.d)
+ - Hassio - [config/configuration.yaml](docs/examples/hassio-config-configuration.yaml)
 
 # Funcional Diagram
 

@@ -1,11 +1,12 @@
 import cors from 'cors'
 
+const base_domain = process.env.BASE_DOMAIN
 const API_PORT = 8080
 const HOME_PORT = 8081
 
 var allowedOrigins = [
-  'https://home.victorwads.com.br',
-  'https://home.victorwads.com.br:7443'
+  'https://' + base_domain,
+  'https://' + base_domain + ':7443'
 ];
 
 export default {
