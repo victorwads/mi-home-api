@@ -1,7 +1,7 @@
 
 # Home API to Control Home Appliance with Hassio, Motion 
 
-This is a Node Js API that centers some home appliance services initialli to able Voice Control controll a Xiaomi Vaccum Cleaner. In my home, I've got new devices and the system starts to growing up. If you want to contribute, be free!!
+This is a Node Js API that centers some home appliance services initially made to able Voice Control of a Xiaomi Vaccum Cleaner. In my home, I've got new devices and the system starts to growing up. If you want to contribute, be free!!
 
 ## API End Points
 
@@ -35,6 +35,7 @@ This is a Node Js API that centers some home appliance services initialli to abl
 
 ## TO-DO-ING :)
  - Control Ligths Via Web Interface
+ - Store Zones Infos And Devices Info on BD
 
 # Dependencies
 
