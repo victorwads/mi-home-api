@@ -43,7 +43,7 @@ This is a Node Js API that centers some home appliance services initialli to abl
  - Hassio - Home Automation System Using Docker - https://www.home-assistant.io/hassio/
  - IFFT - Google Assistant Integration - https://ifttt.com
  
-## Dependencies Configs Exemples
+## Dependencies Configs Examples
 
  - Motion - [etc/motion/config.d - exemple](docs/examples/etc-motion-config.d)
  - Hassio - [config/configuration.yaml](docs/examples/hassio-config-configuration.yaml)
