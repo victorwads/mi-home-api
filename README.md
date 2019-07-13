@@ -35,6 +35,7 @@ This is a Node Js API that centers some home appliance services initially made t
 
 ## TO-DO-ING :)
  - Control Ligths Via Web Interface
+ - Start Vaccum EndPoint
  - Check Server Baterry Status
  - Check Server Storage Status
  - Replace hass.io
