@@ -1,7 +1,7 @@
 
 # Home API to Control Home Appliance with Hassio, Motion 
 
-This is a Node Js API that centers some home appliance services initialli to able Voice Control controll a Xiaomi Vaccum Cleaner. In my home, I've got new devices and the system starts to growing up. If you want to contribute, be free!!
+This is a Node Js API that centers some home appliance services initially made to able Voice Control of a Xiaomi Vaccum Cleaner. In my home, I've got new devices and the system starts to growing up. If you want to contribute, be free!!
 
 ## API End Points
 
@@ -20,9 +20,8 @@ This is a Node Js API that centers some home appliance services initialli to abl
        When Start: Send Motion Detect Notification
        When Stops: Send Video Access Link Notification
    
-# System Features
+# Features
 
-## Avaible
  - Control Xiaomi Vaccum by Google Assitant
    - "Send vaccum to dock"
    - "Change vaccum's Power to ${speed}"
@@ -33,16 +32,17 @@ This is a Node Js API that centers some home appliance services initialli to abl
    - When WebCam Detects Motion - Text With Warning
    - When salves Detected Motion video - Text with button to access the via via WebInterface
 
-## TO-DO-ING :)
- - Control Ligths Via Web Interface
+[See next planned changes Here](todoing.md)
 
 # Dependencies
 
+ - Miio - Xiaomi Device Comunication - https://github.com/aholstenson/miio
  - Motion - Stream WebCam - https://github.com/Motion-Project/motion
  - OneSignal - Send Notifications - https://github.com/zeyneloz/onesignal-node
  - Hassio - Home Automation System Using Docker - https://www.home-assistant.io/hassio/
+  - core - will be replaced by miio npm package
  - IFFT - Google Assistant Integration - https://ifttt.com
- 
+
 ## Dependencies Configs Examples
 
  - Motion - [etc/motion/config.d - exemple](docs/examples/etc-motion-config.d)
@@ -51,3 +51,11 @@ This is a Node Js API that centers some home appliance services initialli to abl
 # Funcional Diagram
 
 ![Google Assistant Voice Control Data Flow Diagram](docs/imgs/Google-Assistant-Data-Flow.svg)
+
+# References
+
+References that help me to learn to this project
+ - https://github.com/marcelrv/XiaomiRobotVacuumProtocol
+ - https://github.com/OpenMiHome/mihome-binary-protocol
+ - https://kaeni.de/deutsche-sprachpakete-fuer-den-roborock-sweep-one/
+ - https://www.domoticz.com/wiki/Xiaomi_Gateway_(Aqara)
