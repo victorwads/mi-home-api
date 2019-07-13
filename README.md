@@ -35,13 +35,25 @@ This is a Node Js API that centers some home appliance services initially made t
 
 ## TO-DO-ING :)
  - Control Ligths Via Web Interface
+ - Check Server Baterry Status
+ - Check Server Storage Status
+ - Replace hass.io
+   - core -> miio
+   - add-on nginx proxy -> dockered nginx proxy
+   - add-on duck dns -> api duck dns call
+   - add-on dns mask -> dockered dns server
+ - Make API Authenticated
+ - List Motion Videos on Web Interface
  - Store Zones Infos And Devices Info on BD
+ - Purge Old Motion Videos
 
 # Dependencies
 
+ - Miio - Xiaomi Device Comunication - https://github.com/aholstenson/miio
  - Motion - Stream WebCam - https://github.com/Motion-Project/motion
  - OneSignal - Send Notifications - https://github.com/zeyneloz/onesignal-node
  - Hassio - Home Automation System Using Docker - https://www.home-assistant.io/hassio/
+  - core - will be replaced by miio npm package
  - IFFT - Google Assistant Integration - https://ifttt.com
  
 ## Dependencies Configs Examples
