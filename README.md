@@ -20,9 +20,8 @@ This is a Node Js API that centers some home appliance services initially made t
        When Start: Send Motion Detect Notification
        When Stops: Send Video Access Link Notification
    
-# System Features
+# Features
 
-## Avaible
  - Control Xiaomi Vaccum by Google Assitant
    - "Send vaccum to dock"
    - "Change vaccum's Power to ${speed}"
@@ -33,7 +32,7 @@ This is a Node Js API that centers some home appliance services initially made t
    - When WebCam Detects Motion - Text With Warning
    - When salves Detected Motion video - Text with button to access the via via WebInterface
 
-[See full next changes Here](todoing.md)
+[See next planned changes Here](todoing.md)
 
 # Dependencies
 
