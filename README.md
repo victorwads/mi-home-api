@@ -33,20 +33,7 @@ This is a Node Js API that centers some home appliance services initially made t
    - When WebCam Detects Motion - Text With Warning
    - When salves Detected Motion video - Text with button to access the via via WebInterface
 
-## TO-DO-ING :)
- - Control Ligths Via Web Interface
- - Start Vaccum EndPoint
- - Check Server Baterry Status
- - Check Server Storage Status
- - Replace hass.io
-   - core -> miio
-   - add-on nginx proxy -> dockered nginx proxy
-   - add-on duck dns -> api duck dns call
-   - add-on dns mask -> dockered dns server
- - Make API Authenticated
- - List Motion Videos on Web Interface
- - Store Zones Infos And Devices Info on BD
- - Purge Old Motion Videos
+[See full next changes Here](todoing.md)
 
 # Dependencies
 
@@ -56,7 +43,7 @@ This is a Node Js API that centers some home appliance services initially made t
  - Hassio - Home Automation System Using Docker - https://www.home-assistant.io/hassio/
   - core - will be replaced by miio npm package
  - IFFT - Google Assistant Integration - https://ifttt.com
- 
+
 ## Dependencies Configs Examples
 
  - Motion - [etc/motion/config.d - exemple](docs/examples/etc-motion-config.d)
@@ -65,3 +52,11 @@ This is a Node Js API that centers some home appliance services initially made t
 # Funcional Diagram
 
 ![Google Assistant Voice Control Data Flow Diagram](docs/imgs/Google-Assistant-Data-Flow.svg)
+
+# References
+
+References that help me to learn to this project
+ - https://github.com/marcelrv/XiaomiRobotVacuumProtocol
+ - https://github.com/OpenMiHome/mihome-binary-protocol
+ - https://kaeni.de/deutsche-sprachpakete-fuer-den-roborock-sweep-one/
+ - https://www.domoticz.com/wiki/Xiaomi_Gateway_(Aqara)
