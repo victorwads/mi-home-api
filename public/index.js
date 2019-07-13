@@ -1,4 +1,4 @@
-const base_domain = process.env.BASE_DOMAIN
+const base_domain = window.location.hostname
 let box, speedBox, speedState, bateryBox, bateryText, statusText;
 let port = window.location.port == '' ? '' : ':' + window.location.port
 
