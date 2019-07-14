@@ -2,7 +2,6 @@ import fetch from 'node-fetch'
 
 const DNS_URL = "https://www.duckdns.org/update"
 const { DYNAMIC_DNS_DOMAIN, DYNAMIC_DNS_TOKEN } = process.env
-console.log(DNS_URL, DYNAMIC_DNS_DOMAIN, DYNAMIC_DNS_TOKEN)
 
 function updateDns() {
     fetch(DNS_URL + `?domains=${DYNAMIC_DNS_DOMAIN}&token=${DYNAMIC_DNS_TOKEN}&ip=`)

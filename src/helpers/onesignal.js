@@ -13,14 +13,14 @@ function sendQuee() {
     for (let i = 0; i < NotificationsQuee.length; i++) {
         Client.sendNotification(NotificationsQuee[i])
             .then(() => {
-                NotificationsQuee.slice(i, 1)
+                NotificationsQuee.splice(i, 1)
             })
             .catch(err => {
                 console.log(err.data)
                 NotificationsQuee.push(notification)
             })
     }
-    queePid = setTimeout(sendQuee, 2000)
+    queePid = setTimeout(sendQuee, 5000)
 }
 
 export const Client = new OneSignal.Client({ userAuthKey, app: { appAuthKey, appId } });
