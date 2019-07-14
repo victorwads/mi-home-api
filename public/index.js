@@ -26,8 +26,6 @@ window.onload = async () => {
     bateryText = document.getElementById('bateryText')
     statusText = document.getElementById('statusText')
 
-
-
     getZonesAPI()
         .then(res => res.json())
         .then(zones => {
@@ -48,19 +46,30 @@ async function toggleCamera() {
 }
 
 async function configStatus() {
-    const response = await (await getStatusAPI()).json()
-    const { fan_speed, battery_level, status } = response.attributes;
+    let apiCall = getStatusAPI()
+    const response = await (await apiCall).json()
+    let { fanSpeed, batteryLevel, state } = response;
     speedBox.removeEventListener('change', setSpeed)
-    speedState = fan_speed
-    speedBox.value = fan_speed
 
-    bateryBox.value = battery_level
-    bateryText.innerHTML = battery_level + '%'
+    if (fanSpeed > 77)
+        fanSpeed = 'Max'
+    else if (fanSpeed > 60)
+        fanSpeed = 'Turbo'
+    else if (fanSpeed > 38)
+        fanSpeed = 'Balanced'
+    else
+        fanSpeed = 'Quiet'
 
-    statusText.innerHTML = status + ' - ' + response.state
+    speedState = fanSpeed
+    speedBox.value = fanSpeed
+
+    bateryBox.value = batteryLevel || 0
+    bateryText.innerHTML = bateryBox.value + '%'
+
+    statusText.innerHTML = state + ' - ' + response.state
 
     speedBox.addEventListener('change', setSpeed)
-    return response
+    return apiCall
 }
 
 async function getStatusAPI() {
@@ -71,7 +80,11 @@ async function getZonesAPI() {
     return fetch(API_URL + 'vacuum/zone', { ...options, method: 'GET' })
 }
 
-async function cleanTest() {
+async function callGeneric(action) {
+    log(fetch(API_URL + 'vacuum/' + action, options))
+}
+
+async function cleanZone() {
     log(fetch(API_URL + 'vacuum/zone', {
         ...options,
         body: JSON.stringify({
@@ -91,18 +104,6 @@ async function setSpeed() {
             speed: speedState,
         })
     }))
-}
-
-async function cleanStop() {
-    log(fetch(API_URL + 'vacuum/stop', options))
-}
-
-async function goToDock() {
-    log(fetch(API_URL + 'vacuum/dock', options))
-}
-
-async function getStatus() {
-    log(getStatusAPI())
 }
 
 async function log(requestPromisse) {

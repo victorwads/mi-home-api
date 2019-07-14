@@ -24,7 +24,7 @@ function sendQuee() {
 }
 
 export const Client = new OneSignal.Client({ userAuthKey, app: { appAuthKey, appId } });
-export const Notify = async (msg, url) => {
+export const Notify = async (msg, url, icon) => {
     NotificationsQuee.push(new OneSignal.Notification({
         contents: {
             en: msg,

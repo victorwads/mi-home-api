@@ -28,10 +28,11 @@
     </div>
     <div>
         <span>Actions: </span>
-        <input type="button" onclick="javascript:cleanStop();" value="Start">
-        <input type="button" onclick="javascript:cleanStop();" value="Stop">
-        <input type="button" onclick="javascript:goToDock();" value="Go to Dock">
-        <input type="button" onclick="javascript:getStatus();" value="Get Status">
+        <input type="button" onclick="javascript:callGeneric('start');" value="Start">
+        <input type="button" onclick="javascript:callGeneric('stop');" value="Stop">
+        <input type="button" onclick="javascript:callGeneric('find');" value="Find">
+        <input type="button" onclick="javascript:callGeneric('dock');" value="Go to Dock">
+        <input type="button" onclick="javascript:log(configStatus());" value="Get Status">
     </div>
     <div>
         <span>Clean Zone: </span>
@@ -45,7 +46,7 @@
             <option>Turbo</option>
             <option>Max</option>
         </select>
-        <input type="button" onclick="javascript:cleanTest();" value="Clean Zone">
+        <input type="button" onclick="javascript:cleanZone();" value="Clean Zone">
     </div>
     <pre id="box"></pre>
 </body>

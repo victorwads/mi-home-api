@@ -6,7 +6,7 @@ Here are the Topics i'll probably work after:
  - Improve WebIU UX :soon:
  - Control Ligths Via Web Interface :soon:
  - Vaccum
-   - Create start Endpoint
+   - Create start Endpoint :heavy_check_mark:
    - Notify State changes
  - Check Server Baterry Status
     - Send power changes Notificaion
@@ -17,7 +17,7 @@ Here are the Topics i'll probably work after:
 
 ## Structural
  - Replace hass.io
-   - core -> miio
+   - core -> miio :heavy_check_mark:
    - add-on nginx proxy -> dockered nginx proxy :soon:
    - add-on duck dns -> api duck dns call :heavy_check_mark:
    - add-on dns mask -> dockered dns server

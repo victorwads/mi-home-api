@@ -1,11 +1,19 @@
-import homeServices from '@helpers/home-services'
+import miio from 'miio'
 
-const entityId = 'vacuum.xiaomi_vacuum_cleaner'
+async function Vacuum() {
+  await Vacuum.Connect
+  console.log(JSON.stringify(Vacuum.Device, null, 2))
+  return Vacuum.Device
+}
+Vacuum.Connect = miio.device({ address: '10.0.0.11' })
+  .then(device => Vacuum.Device = device)
+
+
 const fanSpeedList = {
-  quiet: 'Quiet',
-  balanced: 'Balanced',
-  turbo: 'Turbo',
-  max: 'Max'
+  quiet: 38,
+  balanced: 60,
+  turbo: 77,
+  max: 100
 }
 
 let aliasZones
@@ -51,58 +59,68 @@ function getZone(name) {
 }
 
 async function getStatus() {
-  return homeServices.getStatus(entityId)
+  return (await Vacuum())._properties
 }
 
 async function setSpeed(speed) {
-  return homeServices.callService('vacuum', 'set_fan_speed', entityId, {
-    fan_speed: fanSpeedList[speed.toLowerCase()]
-  })
+  return Vacuum()
+    .then(d => d.changeFanSpeed(fanSpeedList[speed.toLowerCase()] || speed))
 }
 
-export default {
+const controler = {
   cleanZone: (req, res) => {
     const { zone, repeats, speed } = req.body
 
     let coords = getZone(zone)
     if (coords === undefined || coords.length === 0) {
-      res.status(200).json({ error: `${zone} do not exists` })
+      return res.status(200).json({ error: `${zone} do not exists` })
     }
-
     if (speed) { setSpeed(speed) }
 
-    homeServices.callService('vacuum', 'xiaomi_clean_zone', entityId, {
-      'repeats': repeats,
-      'zone': coords
-    }).then(response => {
-      res.status(200).json({ status: `cleaning ${zone}` })
-    })
+    for (let i = 0; i < coords.length; i++) {
+      const zone = coords[i];
+      if (zone.length === 4)
+        zone.push(repeats)
+    }
+
+    return Vacuum()
+      .then(d => d.activateZoneClean(coords))
+      .then(() => res.status(200).json({ status: `cleaning ${zone}` }))
+      .catch(err => res.status(500).json({ err }))
   },
+
   stop: async (req, res) => {
     const status = await getStatus()
-    if (status.state === 'returning') { await homeServices.callService('vacuum', 'pause', entityId) }
-
-    homeServices.callService('vacuum', 'stop', entityId)
-      .then(response =>
-        res.status(200).json({ status: 'stoping' })
-      )
+    if (status.state === 'returning') {
+      await Vacuum().then(d => d.pause())
+    }
+    return controler.generic('deactivateCleaning', 'stoped')(req, res)
   },
-  dock: (req, res) =>
-    homeServices.callService('vacuum', 'return_to_base', entityId)
-      .then(response =>
-        res.status(200).json({ status: 'going back' })
-      ),
+
+  generic: function (action, msg) {
+    return async (req, res) => {
+      return Vacuum()
+        .then(d => d[action]())
+        .then(() => res.status(200).json({ status: msg }))
+        .catch(err => res.status(500).json({ err }))
+    }
+  },
+
   setSpeed: (req, res) => {
     const { speed } = req.body
 
-    setSpeed(speed).then(response =>
-      res.status(200).json(response)
-    )
+    setSpeed(speed)
+      .then(response => res.status(200).json(response))
+      .catch(err => res.status(500).json({ err }))
   },
-  status: (req, res) =>
-    getStatus().then(response =>
-      res.status(200).json(response)
-    ),
+
+  status: (req, res) => getStatus()
+    .then(status => res.status(200).json(status))
+    .catch(err => res.status(500).json({ err }))
+  ,
+
   zones: (req, res) =>
     res.status(200).json(aliasZones)
 }
+
+export default controler
