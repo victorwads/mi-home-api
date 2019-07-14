@@ -2,7 +2,6 @@ import miio from 'miio'
 
 async function Vacuum() {
   await Vacuum.Connect
-  console.log(JSON.stringify(Vacuum.Device, null, 2))
   return Vacuum.Device
 }
 Vacuum.Connect = miio.device({ address: '10.0.0.11' })

@@ -8,15 +8,21 @@
     <title>Victor Wads's House</title>
     <link rel="manifest" href="/manifest.json" />
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
     <script src="index.js"></script>
+    <script src="color-picker.js"></script>
+    <script src="camera.js" async></script>
+    <script src="vaccum.js" async></script>
+    <script src="ligths.js" async></script>
 </head>
 
 <body>
+    <h1>Camera</h1>
     <div>
         <input type="button" onclick="javascript:toggleCamera();" value="Camera">
     </div>
     <img id="video" />
+    <h1>Vaccum</h1>
     <div>
         <span>Status: </span>
         <span id="statusText"></span>
@@ -32,7 +38,7 @@
         <input type="button" onclick="javascript:callGeneric('stop');" value="Stop">
         <input type="button" onclick="javascript:callGeneric('find');" value="Find">
         <input type="button" onclick="javascript:callGeneric('dock');" value="Go to Dock">
-        <input type="button" onclick="javascript:log(configStatus());" value="Get Status">
+        <input type="button" onclick="javascript:configStatus();" value="Get Status">
     </div>
     <div>
         <span>Clean Zone: </span>
@@ -48,6 +54,20 @@
         </select>
         <input type="button" onclick="javascript:cleanZone();" value="Clean Zone">
     </div>
+    <h1>Lights</h1>
+    <select id="lightBox">
+        <option value="">all</option>
+        <option>victor</option>
+        <option>living room</option>
+    </select>
+    <input type="button" onclick="javascript:lightCallGeneric('on');" value="On">
+    <input type="button" onclick="javascript:lightCallGeneric('off');" value="Off">
+    <input type="button" onclick="javascript:lightCallGeneric('toggle');" value="Toggle">
+    <input type="button" onclick="javascript:configStatusLights();" value="Get Status">
+    <div>
+        <span>Color:</span> <span class="color"></span>
+    </div>
+    <h1>Logs</h1>
     <pre id="box"></pre>
 </body>
 

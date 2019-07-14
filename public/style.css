@@ -1,8 +1,10 @@
+@import url(color-picker.css);
+
 html {
     background-color: black;
 }
 
-p, span, pre {
+h1, p, span, pre {
     color: white;
 }
 
