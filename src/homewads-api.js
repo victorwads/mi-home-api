@@ -13,9 +13,9 @@ DuckDns()
 
 // UI Server
 const home = express()
+home.use(logger('dev'))
 home.use(express.static('public'))
 home.use(archivePath, expressVideo.stream(motionArchive))
-home.use(logger('dev'))
 
 // API Server
 const api = express()

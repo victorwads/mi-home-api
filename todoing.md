@@ -3,22 +3,23 @@
 Here are the Topics i'll probably work after:
 
 ## Functional
- - Control Ligths Via Web Interface
+ - Improve WebIU UX :soon:
+ - Control Ligths Via Web Interface :soon:
  - Vaccum
    - Create start Endpoint
    - Notify State changes
  - Check Server Baterry Status
     - Send power changes Notificaion
  - Check Server Storage status
- - Set notifications typed icons
+ - Set notifications typed icons :soon:
  - List Motion videos on Web Interface
  - **Find a way to get Xiaomi Gateway  integration
 
 ## Structural
  - Replace hass.io
    - core -> miio
-   - add-on nginx proxy -> dockered nginx proxy
-   - add-on duck dns -> api duck dns call
+   - add-on nginx proxy -> dockered nginx proxy :soon:
+   - add-on duck dns -> api duck dns call :heavy_check_mark:
    - add-on dns mask -> dockered dns server
  - Store on BD
    - Vaccum Zones

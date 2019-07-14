@@ -37,7 +37,7 @@ window.onload = async () => {
         })
 
     configStatus()
-    setInterval(configStatus, 10000);
+    setInterval(configStatus, 300000);
 }
 
 async function toggleCamera() {
