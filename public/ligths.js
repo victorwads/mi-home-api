@@ -4,7 +4,7 @@ let boxLight, lastPost
     const pickr = Pickr.create({
         el: '.color',
         theme: 'nano',
-        default: 'fff',
+        default: '#ffff',
         defaultRepresentation: 'HEX',
         components: {
             // Main components
@@ -24,8 +24,8 @@ let boxLight, lastPost
     pickr.on('save', (color, instance) => {
         changeColor(color)
     }).on('change', (color, instance) => {
-        let diff = (new Date().getTime() - lastPost) / 100
-        if (diff > 5) {
+        let diff = new Date().getTime() - lastPost
+        if (diff > 100) {
             changeColor(color)
         }
     });
@@ -45,9 +45,9 @@ async function getLightStatusAPI() {
 
 async function changeColor(color) {
     lastPost = new Date().getTime()
-    log(fetch(API_URL + 'light/color' + selectLight.value, {
+    log(fetch(API_URL + 'light/color/' + selectLight.value, {
         ...options,
-        body: JSON.stringify({ color: '#' + color.toHEXA().join(''), duration: 10 })
+        body: JSON.stringify({ color: '#' + color.toHEXA().join(''), duration: 100 })
     }))
 }
 

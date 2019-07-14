@@ -46,6 +46,7 @@ const controller = {
         .then(list => list.map(light => light
             .changePower(!light._properties.power).catch(logErr, light)
         ))
+        .then(list => list.map(() => true))
         .then(result => res.status(200).json(result))
     ,
 
@@ -54,6 +55,7 @@ const controller = {
             .then(list => list.map(light =>
                 light[action](...args).catch(logErr, light)
             ))
+            .then(list => list.map(() => true))
             .then(result => res.status(200).json(result))
     },
 
@@ -66,6 +68,7 @@ const controller = {
                     Color(color, 'rgb'), { duration: duration || 500 }
                 ).catch(logErr, light)
             ))
+            .then(list => list.map(() => true))
             .then(result => res.status(200).json(result))
     },
 }
