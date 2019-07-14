@@ -31,7 +31,9 @@ This is a Node Js API that centers some home appliance services initially made t
    - "Send vaccum to dock"
    - "Change vaccum's Power to ${speed}"
    - "Clean the ${room_name}"
- - Control Xiaomi Vaccum by Embeded Web Interface
+ - Embeded Web Interface
+   - Control Xiaomi Vaccum
+   - Control Xiaomi Yeelight Ligths
  - Stream WebCam Video via WebInterface
  - Send Web/Mobile Notifications to Device
    - When WebCam Detects Motion - Text With Warning
@@ -44,14 +46,11 @@ This is a Node Js API that centers some home appliance services initially made t
  - Miio - Xiaomi Device Comunication - https://github.com/aholstenson/miio
  - Motion - Stream WebCam - https://github.com/Motion-Project/motion
  - OneSignal - Send Notifications - https://github.com/zeyneloz/onesignal-node
- - Hassio - Home Automation System Using Docker - https://www.home-assistant.io/hassio/
-  - core - will be replaced by miio npm package
  - IFFT - Google Assistant Integration - https://ifttt.com
 
 ## Dependencies Configs Examples
 
  - Motion - [etc/motion/config.d - exemple](docs/examples/etc-motion-config.d)
- - Hassio - [config/configuration.yaml](docs/examples/hassio-config-configuration.yaml)
 
 # Funcional Diagram
 
