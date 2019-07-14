@@ -4,14 +4,20 @@ import server from './config/server'
 import bodyParser from 'body-parser'
 import logger from 'morgan'
 import validator from 'express-validator'
-import versionRoutes from './modules/v1/routes'
-import { motionArchive, archivePath } from './modules/v1/motion/controller'
+import DuckDns from './modules/duckDns'
+import versionRoutes from './routes/v1/routes'
+import { motionArchive, archivePath } from './routes/v1/motion/controller'
 
+// Services
+DuckDns()
+
+// UI Server
 const home = express()
 home.use(express.static('public'))
 home.use(archivePath, expressVideo.stream(motionArchive))
 home.use(logger('dev'))
 
+// API Server
 const api = express()
 server.cors(api)
 api.use(bodyParser.json())

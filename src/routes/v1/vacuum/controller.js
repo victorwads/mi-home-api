@@ -47,7 +47,6 @@ function getZone(name) {
       zoneCoords.forEach(element => coords.push(element))
   })
 
-  console.log(names, coords)
   return coords
 }
 
