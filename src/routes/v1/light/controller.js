@@ -2,32 +2,30 @@ import miio from 'miio'
 import { color as Color } from 'abstract-things/values'
 
 const Lights = [
-    { name: 'victor', ip: '10.0.0.12', device: null, error: false },
-    { name: 'living room', ip: '10.0.0.13', device: null, error: false }
+    { name: 'victor', ip: '10.0.0.12', device: null },
+    { name: 'living room', ip: '10.0.0.13', device: null }
 ]
 
 async function Connect() {
     const promises = Lights
-        .filter(light => light.error || light.device === null)
+        .filter(light => light.device === null)
         .map(async light => {
             console.log('Connecting with ', light.name)
             return miio.device({ address: light.ip })
                 .then(device => light.device = device)
-                .catch(err => {
-                    Light.Devices[i] = null
-                    logErr(err)
-                })
+                .catch(err => logErr(err, light))
         })
     return Promise.all(promises)
 }
-function logErr(err) {
+function logErr(err, light) {
     console.log(err)
+    light.device = null
 }
 
 async function Light(name) {
     await Connect()
     return Lights
-        .filter(light => !light.error && light.device !== null && (!name || light.name === name))
+        .filter(light => light.device !== null && (!name || light.name === name))
         .map(light => light.device)
 }
 
@@ -41,12 +39,12 @@ const controller = {
     status: (req, res) => {
         getStatus(req.params.name)
             .then(status => res.status(200).json(status))
-            .catch(err => logErr(err), res.status(500).json({ err }))
+            .catch(err => res.status(500).json({ err }))
     },
 
     toggle: async (req, res) => Light(req.params.name)
         .then(list => list.map(light => light
-            .changePower(!light._properties.power).catch(logErr)
+            .changePower(!light._properties.power).catch(logErr, light)
         ))
         .then(result => res.status(200).json(result))
     ,
@@ -54,7 +52,7 @@ const controller = {
     generic: function (action, msg, args = []) {
         return (req, res) => Light(req.params.name)
             .then(list => list.map(light =>
-                light[action](...args).catch(logErr)
+                light[action](...args).catch(logErr, light)
             ))
             .then(result => res.status(200).json(result))
     },
@@ -66,7 +64,7 @@ const controller = {
             .then(list => list.map(light => light
                 .changeColor(
                     Color(color, 'rgb'), { duration: duration || 500 }
-                ).catch(logErr)
+                ).catch(logErr, light)
             ))
             .then(result => res.status(200).json(result))
     },
