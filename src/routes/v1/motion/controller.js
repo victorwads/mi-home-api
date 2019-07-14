@@ -3,20 +3,32 @@ import { Notify } from '@helpers/onesignal'
 export const archivePath = '/archive'
 export const motionArchive = '/usr/share/hassio/share/motion/'
 
+let last_notify = new Date().getTime()
+let recording = false
+
+function NotifyMotion(motion_area) {
+    let diff = (new Date().getTime() - last_notify) / 1000
+
+    if (recording == false && diff > 30) {
+        Notify(`Motion Detected ${motion_area.width}x${motion_area.height}`)
+        last_notify = new Date().getTime()
+    }
+}
+
 export default {
     detect: (req, res) => {
-        console.log(req.body)
+        NotifyMotion(req.body.motion_area)
         res.send()
     },
     movie: (req, res) => {
         const { file, action, motion_area } = req.body
         let url = archivePath + '/' + file.replace(motionArchive, '')
-        console.log(req.body)
-        console.log(url)
-        if (action === 'start')
-            Notify(`Motion Detected ${motion_area.width}x${motion_area.height}, recording...`)
-        else if (action === 'end') {
+        if (action === 'start') {
+            NotifyMotion(motion_area)
+            recording = true
+        } else if (action === 'end') {
             Notify('Video Available', url)
+            recording = false
         }
 
         res.send()
