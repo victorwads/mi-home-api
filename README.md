@@ -15,9 +15,12 @@ This is a Node Js API that centers some home appliance services initially made t
    - vaccum/
      - GET:status: - Get Vaccum Status
      - GET:zone: - Retrurn the list of zones
+     - POST:start - Start cleaning
+     - POST:stop - Stop the vaccum, even if it is going to dock
+     - POST:spot - Start spot clean
+     - POST:find - Make Vaccum play a sound
      - POST:zone - Body: {[speed: int,] zone: string, repeats: int} - Start Cleaning one or more Zones, zone names splited by ' '
      - POST:speed - Body: {speed: int} - Start Cleaning one or more Zones, zone names splited by ' '
-     - POST:stop - Stop the vaccum, even if it is going to dock
      - POST:dock - Send the vaccum to dock
    - motion/
      - POST:detect -{motion_area: {x: int, y: int, width: int, heigth: int}} - Send Motion Detect Notification
