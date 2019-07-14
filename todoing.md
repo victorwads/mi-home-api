@@ -5,7 +5,8 @@ Here are the Topics i'll probably work after:
 ## Functional
  - Improve WebIU UX :soon:
  - Control Ligths Via Web Interface :heavy_check_mark:
- - Vaccum
+   - Create Dimmer API :soon:
+ - Vaccum :soon:
    - Create start Endpoint :heavy_check_mark:
    - Notify State changes
  - Check Server Baterry Status
@@ -14,6 +15,9 @@ Here are the Topics i'll probably work after:
  - Set notifications typed icons :soon:
  - List Motion videos on Web Interface
  - **Find a way to get Xiaomi Gateway  integration
+ - Automation
+   - Auto Off Lights
+   - Schecule Actions
 
 ## Structural
  - Replace hass.io
