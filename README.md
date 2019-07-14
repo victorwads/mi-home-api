@@ -6,19 +6,24 @@ This is a Node Js API that centers some home appliance services initially made t
 ## API End Points
 
  - /api/v1/
+   - light/ - If name is passed filter light, if not, all lights are used
+     - GET:status/:name*?: - Get Lights Status
+     - POST:on/:name*?: - Turn on Light
+     - POST:off/:name*?: - Turn off Light
+     - POST:toggle/:name*?: - Toogle Light Power
+     - POST:color/:name*?: - Body: {color: string, duration: int} - Change Light color with duration animation
    - vaccum/
-     - status:GET - Get Vaccum Status
-     - zone:GET - Retrurn the list of zones
-     - zone:POST - Body: {[speed: int,] zone: string, repeats: int} - Start Cleaning one or more Zones, zone names splited by ' '
-     - speed:POST - Body: {speed: int} - Start Cleaning one or more Zones, zone names splited by ' '
-     - stop:POST - Stop the vaccum, even if it is going to dock
-     - dock:POST - Send the vaccum to dock
+     - GET:status: - Get Vaccum Status
+     - GET:zone: - Retrurn the list of zones
+     - POST:zone - Body: {[speed: int,] zone: string, repeats: int} - Start Cleaning one or more Zones, zone names splited by ' '
+     - POST:speed - Body: {speed: int} - Start Cleaning one or more Zones, zone names splited by ' '
+     - POST:stop - Stop the vaccum, even if it is going to dock
+     - POST:dock - Send the vaccum to dock
    - motion/
-     - detect:POST -{motion_area: {x: int, y: int, width: int, heigth: int}}
-       Send Motion Detect Notification - TO DO
-     - movie:POST - {file: string, action: string(start|end)[, motion_area: {x: int, y: int, width: int, heigth: int}]}
+     - POST:detect -{motion_area: {x: int, y: int, width: int, heigth: int}} - Send Motion Detect Notification
+     - POST:movie - {file: string, action: string(start|end)[, motion_area: {x: int, y: int, width: int, heigth: int}]}
        When Start: Send Motion Detect Notification
-       When Stops: Send Video Access Link Notification
+       When Ends: Send Video Access Link Notification
    
 # Features
 

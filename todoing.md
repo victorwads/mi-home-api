@@ -4,7 +4,7 @@ Here are the Topics i'll probably work after:
 
 ## Functional
  - Improve WebIU UX :soon:
- - Control Ligths Via Web Interface :soon:
+ - Control Ligths Via Web Interface :heavy_check_mark:
  - Vaccum
    - Create start Endpoint :heavy_check_mark:
    - Notify State changes
