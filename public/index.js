@@ -1,8 +1,11 @@
-const base_domain = window.location.hostname
-let port = window.location.port == '' ? '' : ':' + window.location.port
+const base_domain = location.hostname
+let port = location.port == '' ? '' : ':' + location.port
 let box
 
-const API_URL = 'https://api.' + base_domain + port + '/api/v1/'
+if (['localhost', '127.0.0.1'].indexOf(base_domain) !== -1)
+    port = ':' + (port.replace(/[^0-9]/g, '') - 1)
+
+const API_URL = location.protocol + '//api.' + base_domain + port + '/api/v1/'
 const options = {
     method: 'POST',
     headers: {

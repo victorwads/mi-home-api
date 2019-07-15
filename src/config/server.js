@@ -6,7 +6,9 @@ const HOME_PORT = 8081
 
 var allowedOrigins = [
   'https://' + base_domain,
-  'https://' + base_domain + ':7443'
+  'https://' + base_domain + ':7443',
+  'http://' + base_domain + ':' + API_PORT,
+  'http://' + base_domain + ':' + HOME_PORT
 ];
 
 export default {
