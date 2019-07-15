@@ -1,75 +1,56 @@
-import miio from 'miio'
 import { color as Color } from 'abstract-things/values'
-
-const Lights = [
-    { name: 'victor', ip: '10.0.0.12', device: null },
-    { name: 'living room', ip: '10.0.0.13', device: null }
-]
-
-async function Connect() {
-    const promises = Lights
-        .filter(light => light.device === null)
-        .map(async light => {
-            console.log('Connecting with ', light.name)
-            return miio.device({ address: light.ip })
-                .then(device => light.device = device)
-                .catch(err => logErr(err, light))
-        })
-    return Promise.all(promises)
-}
-function logErr(err, light) {
-    console.log(err)
-    light.device = null
-}
+import Connect, { Type, LogError, GenericRespose } from '../../../modules/miio-connect'
 
 async function Light(name) {
-    await Connect()
-    return Lights
-        .filter(light => light.device !== null && (!name || light.name === name))
-        .map(light => light.device)
+    return (await Connect(Type.Light))
+        .filter(light => !name || light.name === name)
 }
 
 async function getStatus(name) {
-    return await Light(name)
-        .then(list => list.map(device => device._properties))
+    return Light(name)
+        .then(list => list.map(device => device.connection._properties))
 }
-Connect()
 
 const controller = {
-    status: (req, res) => {
+    status: (req, res) => GenericRespose(
+        res,
         getStatus(req.params.name)
-            .then(status => res.status(200).json(status))
-            .catch(err => res.status(500).json({ err }))
-    },
+    ),
 
-    toggle: async (req, res) => Light(req.params.name)
-        .then(list => list.map(light => light
-            .changePower(!light._properties.power).catch(logErr, light)
-        ))
-        .then(list => list.map(() => true))
-        .then(result => res.status(200).json(result))
-    ,
+    toggle: (req, res) => GenericRespose(
+        res,
+        Light(req.params.name)
+            .then(list => list.map(async light => {
+                try {
+                    const power = !light.connection._properties.power
+                    await light.connection.changePower(power)
+                    return { name: light.name, msg: 'turned ' + (power ? 'on' : 'off') }
+                } catch (err) {
+                    return LogError(err, light)
+                }
+            }))
+    ),
 
     generic: function (action, msg, args = []) {
-        return (req, res) => Light(req.params.name)
-            .then(list => list.map(light =>
-                light[action](...args).catch(logErr, light)
-            ))
-            .then(list => list.map(() => true))
-            .then(result => res.status(200).json(result))
+        return (req, res) => GenericRespose(
+            res,
+            Light(req.params.name)
+                .then(list => list.map(async light => {
+                    try {
+                        await light.connection[action](...args)
+                        return { name: light.name, msg }
+                    } catch (err) {
+                        return LogError(err, light)
+                    }
+                }))
+        )
     },
 
     color: (req, res) => {
         const { color, duration } = req.body
+        const args = [Color(color, 'rgb'), { duration: duration || 500 }]
 
-        Light(req.params.name)
-            .then(list => list.map(light => light
-                .changeColor(
-                    Color(color, 'rgb'), { duration: duration || 500 }
-                ).catch(logErr, light)
-            ))
-            .then(list => list.map(() => true))
-            .then(result => res.status(200).json(result))
+        controller.generic('changeColor', 'color changed to ' + color, args)(req, res)
     },
 }
 

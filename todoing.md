@@ -22,13 +22,13 @@ Here are the Topics i'll probably work after:
 ## Structural
  - Replace hass.io
    - core -> miio :heavy_check_mark:
-   - add-on nginx proxy -> dockered nginx proxy :soon:
+   - add-on nginx proxy -> dockered nginx proxy :heavy_check_mark:
    - add-on duck dns -> api duck dns call :heavy_check_mark:
-   - add-on dns mask -> dockered dns server
+   - add-on dns mask -> dockered dns server :heavy_check_mark:
  - Store on BD
    - Vaccum Zones
-   - Devices Info
-   - Devices Configs
+   - Devices Configs/Info :soon:
+     - Prepare API to load devices info :heavy_check_mark:
    - Logs
  - Purge Old Motion Videos
 

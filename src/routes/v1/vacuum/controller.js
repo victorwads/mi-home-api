@@ -1,12 +1,9 @@
-import miio from 'miio'
+import Connect, { Type, LogError, GenericRespose } from '../../../modules/miio-connect'
 
 async function Vacuum() {
-  await Vacuum.Connect
-  return Vacuum.Device
+  // TODO handle more vaccums
+  return (await Connect(Type.Vacuum))[0].connection
 }
-Vacuum.Connect = miio.device({ address: '10.0.0.11' })
-  .then(device => Vacuum.Device = device)
-
 
 const fanSpeedList = {
   quiet: 38,
