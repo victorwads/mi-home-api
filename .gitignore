@@ -63,7 +63,7 @@ typings/
 package-lock\.json
 
 # Docker and Storage
-services/motion/
+services/motion/movie
 services/proxy/config.json
 services/proxy/data
 services/proxy/letsencrypt
