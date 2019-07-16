@@ -61,3 +61,8 @@ typings/
 .next
 
 package-lock\.json
+
+# Docker Storage
+services/motion/
+services/proxy/data
+services/proxy/letsencrypt

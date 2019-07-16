@@ -3,7 +3,7 @@
     "engine": "mysql",
     "host": "db",
     "name": "npm",
-    "user": "npm",
+    "user": "root",
     "password": "npm",
     "port": 3306
   }
