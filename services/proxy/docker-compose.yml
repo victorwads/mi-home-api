@@ -29,3 +29,14 @@ services:
       MARIADB_PASSWORD: "npm"
     volumes:
       - ./data/mysql:/var/lib/mysql
+  dns:
+      restart: always
+      image: jpillora/dnsmasq
+      volumes:
+          - ./dnsmasq.conf:/etc/dnsmasq.conf
+      ports:
+          - "53:53/udp"
+          - "53:53/tcp"
+          - "5380:8080/tcp"
+      cap_add:
+          - NET_ADMIN

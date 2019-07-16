@@ -1,7 +1,7 @@
 import { Notify } from '@helpers/onesignal'
 
 export const archivePath = '/archive'
-export const motionArchive = '/usr/share/hassio/share/motion/'
+export const motionArchive = '/home/homeauto/mi-home-api/services/motion/'
 
 let last_notify = new Date().getTime()
 let recording = false
