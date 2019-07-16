@@ -62,7 +62,8 @@ typings/
 
 package-lock\.json
 
-# Docker Storage
+# Docker and Storage
 services/motion/
+services/proxy/config.json
 services/proxy/data
 services/proxy/letsencrypt
