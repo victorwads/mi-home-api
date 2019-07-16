@@ -29,6 +29,7 @@ export const Notify = async (msg, url, icon) => {
         contents: {
             en: msg,
         },
+        url: url,
         web_buttons: url ? [{ id: "see", text: "Watch", url }] : [],
         included_segments: ["Active Users", "Inactive Users"]
     }))

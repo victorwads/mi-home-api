@@ -1,4 +1,4 @@
-import { Notify } from '@helpers/onesignal'
+import { Notify } from '../../../helpers/onesignal'
 
 export const archivePath = '/archive'
 export const motionArchive = '/home/homeauto/mi-home-api/services/motion/'
@@ -21,8 +21,9 @@ export default {
         res.send()
     },
     movie: (req, res) => {
+        console.log(req.body)
         const { file, action, motion_area } = req.body
-        let url = archivePath + '/' + file.replace(motionArchive, '')
+        let url = archivePath + '/' + file.replace(motionArchive, '').replace(/\/\//g, '/')
         if (action === 'start') {
             NotifyMotion(motion_area)
             recording = true
