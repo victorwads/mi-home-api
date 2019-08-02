@@ -12,6 +12,8 @@ This is a Node Js API that centers some home appliance services initially made t
      - POST:off/:name*?: - Turn off Light
      - POST:toggle/:name*?: - Toogle Light Power
      - POST:color/:name*?: - Body: {color: string, duration: int} - Change Light color with duration animation
+     - POST:brightness/:name*?: - Body: {value: int[0-100], duration: int} - Change Light color with duration animation
+     - POST:temperature/:name*?: - Body: {value: int[2700-6500], duration: int} - Change Light color with duration animation
    - vaccum/
      - GET:status: - Get Vaccum Status
      - GET:zone: - Retrurn the list of zones
