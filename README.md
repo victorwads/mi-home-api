@@ -66,3 +66,4 @@ References that help me to learn to this project
  - https://github.com/OpenMiHome/mihome-binary-protocol
  - https://kaeni.de/deutsche-sprachpakete-fuer-den-roborock-sweep-one/
  - https://www.domoticz.com/wiki/Xiaomi_Gateway_(Aqara)
+ - https://dev.mi.com/docs/passport/en/scopes/
