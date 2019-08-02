@@ -8,6 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "./node_modules/.bin/eslint ./src --ext .js --fix"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/victorwads/homewads-api.git"
@@ -38,7 +41,7 @@
     "express": "^4.17.1",
     "express-validator": "5.0.1",
     "express-video": "^1.0.4",
-    "miio": "git://github.com/victorwads/miio.git#vw0.1",
+    "miio": "git://github.com/victorwads/miio.git#vw0.3",
     "module-alias": "^2.2.0",
     "morgan": "^1.9.1",
     "node-fetch": "^2.6.0",
@@ -51,6 +54,7 @@
     "eslint-plugin-node": "^9.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "pre-commit": "^1.2.2"
   }
 }

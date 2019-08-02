@@ -1,5 +1,7 @@
-let boxLight, lastPost
+let boxLight, lastPost, boxRange, boxTemp
 {
+    boxRange = document.getElementById('ligthRange')
+    boxTemp = document.getElementById('temperatureRange')
     selectLight = document.getElementById('lightBox')
     const pickr = Pickr.create({
         el: '.color',
@@ -29,6 +31,15 @@ let boxLight, lastPost
             changeColor(color)
         }
     });
+
+    boxRange.addEventListener('change', function () {
+        console.log(this.value)
+        changeValue('brightness', this.value);
+    })
+    boxTemp.addEventListener('change', function () {
+        console.log(this.value)
+        changeValue('temperature', this.value);
+    })
 }
 
 async function configStatusLights() {
@@ -57,4 +68,16 @@ async function lightCallGeneric(action) {
 
 async function configStatusLights() {
     const response = await log(getLightStatusAPI())
+}
+
+async function changeValue(name, value) {
+    lastPost = new Date().getTime()
+    log(fetch(API_URL + 'light/' + name + '/' + selectLight.value, {
+        ...options,
+        body: JSON.stringify({ value })
+    }))
+}
+
+async function changeColorMode(mode) {
+    return changeValue('mode', mode)
 }

@@ -62,6 +62,9 @@ typings/
 
 package-lock\.json
 
+#Vscode
+.vscode
+
 # Docker and Storage
 services/motion/movie
 services/proxy/config.json

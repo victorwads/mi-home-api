@@ -1,6 +1,6 @@
-import Connect, { Type, LogError, GenericRespose } from '../../../modules/miio-connect'
+import Connect, { Type } from '../../../modules/miio-connect'
 
-async function Vacuum() {
+async function Vacuum () {
   // TODO handle more vaccums
   return (await Connect(Type.Vacuum))[0].connection
 }
@@ -34,7 +34,7 @@ let aliasZones
   }
 }
 
-function getZone(name) {
+function getZone (name) {
   name = name.toLowerCase()
     .replace(/ room/g, 'room')
     .replace(/ and /g, ' ')
@@ -47,18 +47,17 @@ function getZone(name) {
   names.forEach(name => {
     let zoneCoords = aliasZones[name]
 
-    if (zoneCoords instanceof Array)
-      zoneCoords.forEach(element => coords.push(element))
+    if (zoneCoords instanceof Array) { zoneCoords.forEach(element => coords.push(element)) }
   })
 
   return coords
 }
 
-async function getStatus() {
+async function getStatus () {
   return (await Vacuum())._properties
 }
 
-async function setSpeed(speed) {
+async function setSpeed (speed) {
   return Vacuum()
     .then(d => d.changeFanSpeed(fanSpeedList[speed.toLowerCase()] || speed))
 }
@@ -74,9 +73,8 @@ const controler = {
     if (speed) { setSpeed(speed) }
 
     for (let i = 0; i < coords.length; i++) {
-      const zone = coords[i];
-      if (zone.length === 4)
-        zone.push(repeats)
+      const zone = coords[i]
+      if (zone.length === 4) { zone.push(repeats) }
     }
 
     return Vacuum()
@@ -112,8 +110,7 @@ const controler = {
 
   status: (req, res) => getStatus()
     .then(status => res.status(200).json(status))
-    .catch(err => res.status(500).json({ err }))
-  ,
+    .catch(err => res.status(500).json({ err })),
 
   zones: (req, res) =>
     res.status(200).json(aliasZones)
