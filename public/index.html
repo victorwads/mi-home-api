@@ -37,8 +37,8 @@
         <input type="button" onclick="javascript:callGeneric('start');" value="Start">
         <input type="button" onclick="javascript:callGeneric('stop');" value="Stop">
         <input type="button" onclick="javascript:callGeneric('find');" value="Find">
-        <input type="button" onclick="javascript:callGeneric('dock');" value="Go to Dock">
-        <input type="button" onclick="javascript:configStatus();" value="Get Status">
+        <input type="button" onclick="javascript:callGeneric('dock');" value="Go to dock">
+        <input type="button" onclick="javascript:configStatus();" value="Get status">
     </div>
     <div>
         <span>Clean Zone: </span>
@@ -47,25 +47,26 @@
         </select>
         <select id="speedBox" aria-placeholder="Speed">
             <option disabled selected>Speed</option>
-            <option>Quiet</option>
-            <option>Balanced</option>
-            <option>Turbo</option>
-            <option>Max</option>
+            <option value="quiet">Quiet</option>
+            <option value="balanced">Balanced</option>
+            <option value="turbo">Turbo</option>
+            <option value="max">Max</option>
         </select>
         <input type="button" onclick="javascript:cleanZone();" value="Clean Zone">
     </div>
     <h1>Lights</h1>
     <select id="lightBox">
-        <option value="">all</option>
-        <option>victor</option>
-        <option>living room</option>
-        <option>workroom</option>
-        <option>bedroom</option>
+        <option value="no">select</option>
+        <option value="bathroom">bathroom</option>
+        <option value="living room">living room</option>
+        <option value="workroom">workroom</option>
+        <option value="bedroom">bedroom</option>
+								<option value="">all</option>
     </select>
-    <input type="button" onclick="javascript:lightCallGeneric('on');" value="On">
-    <input type="button" onclick="javascript:lightCallGeneric('off');" value="Off">
+    <input type="button" onclick="javascript:lightCallGeneric('on');" value="Turn on">
+    <input type="button" onclick="javascript:lightCallGeneric('off');" value="Turn off">
     <input type="button" onclick="javascript:lightCallGeneric('toggle');" value="Toggle">
-    <input type="button" onclick="javascript:configStatusLights();" value="Get Status">
+    <input type="button" onclick="javascript:configStatusLights();" value="Get status">
     <div>
         <span>Color:</span> <span class="color"></span>
     </div>
