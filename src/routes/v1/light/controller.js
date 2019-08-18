@@ -64,7 +64,7 @@ const controller = {
     const { value, duration } = req.body
     const args = [Color(value + 'k', 'temperature'), { duration }]
 
-    controller.generic('changeColor', 'color changed to ' + value, args)(req, res)
+    controller.generic('changeColor', 'temperature changed to ' + value, args)(req, res)
   }
 }
 
