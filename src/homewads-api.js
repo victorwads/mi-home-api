@@ -1,5 +1,5 @@
 import express from 'express'
-import expressVideo from 'express-video'
+import serveIndex from 'serve-index'
 import server from './config/server'
 import bodyParser from 'body-parser'
 import logger from 'morgan'
@@ -15,7 +15,7 @@ DuckDns()
 const home = express()
 home.use(logger('dev'))
 home.use(express.static('public'))
-home.use(archivePath, expressVideo.stream(motionArchive))
+home.use(archivePath, serveIndex(motionArchive))
 
 // API Server
 const api = express()
