@@ -45,7 +45,8 @@
     "module-alias": "^2.2.0",
     "morgan": "^1.9.1",
     "node-fetch": "^2.6.0",
-    "onesignal-node": "^2.1.0"
+    "onesignal-node": "^2.1.0",
+    "serve-index": "^1.9.1"
   },
   "devDependencies": {
     "eslint": "^6.0.1",
