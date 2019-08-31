@@ -15,6 +15,7 @@ DuckDns()
 const home = express()
 home.use(logger('dev'))
 home.use(express.static('public'))
+home.use(archivePath, express.static(motionArchive))
 home.use(archivePath, serveIndex(motionArchive))
 
 // API Server
